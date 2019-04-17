@@ -1,7 +1,7 @@
 import React from 'react'
 import {Provider} from 'react-redux'
 import {createStore, applyMiddleware, compose} from 'redux'
-import thunkMiddleware from 'redux-thunk'
+// import thunkMiddleware from 'redux-thunk'
 
 import reducers from '../reducers'
 import Router from './Router'
@@ -9,17 +9,18 @@ import Router from './Router'
 import {persistStore} from 'redux-persist'
 import {PersistGate} from 'redux-persist/es/integration/react'
 
-// import createSagaMiddleware from 'redux-saga';
-// import {watcherSaga} from './../sagas/saga';
+import createSagaMiddleware from 'redux-saga';
+import root_saga from './../sagas/';
 
-// const sagaMiddleware = createSagaMiddleware();
+const sagaMiddleware = createSagaMiddleware();
 
-const middleware = [thunkMiddleware]
+const middleware = [sagaMiddleware]
 const store = compose(applyMiddleware(...middleware))(createStore)(reducers)
 
-// sagaMiddleware.run(watcherSaga);
 
-let persistor = persistStore(store)
+let persistor = persistStore(store);
+sagaMiddleware.run(root_saga);
+
 
 class Root extends React.Component {
   render() {

@@ -18,6 +18,7 @@ import { Icons, Constants } from '@common'
 import ToggleSwitch from 'toggle-switch-react-native'
 import { Icon } from 'native-base';
 
+
 class SignIn extends React.Component {
   state = {
     email: '',
@@ -111,6 +112,12 @@ function mapStateToProps({ PostsReducers }) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch)
+
+  // return {
+  //   getPosts: () => {
+  //     dispatch(ActionTypes.getPost())
+  //   }
+  // }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn)
